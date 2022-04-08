@@ -64,7 +64,26 @@ final class DeepLinkManager: ObservableObject {
             host == DeepLink.carTechnicalInfo.id
         {
             currentTab = .list
-            currentInternalScreen = .carTechnicalInfo
+            currentInternalScreen = .carDetailParametrized(
+                carBrand: "",
+                carModel: "",
+                nestedLink: .carTechnicalInfo
+            )
+            return true
+        }
+
+        // carapp://carAssistance
+        if
+            host == DeepLink.carAssistance.id
+        {
+            currentTab = .list
+            currentInternalScreen = .carDetailParametrized(
+                carBrand: "",
+                carModel: "",
+                nestedLink: .carTechnicalInfoParametrized(
+                    nestedLink: .carAssistance
+                )
+            )
             return true
         }
 

@@ -8,13 +8,29 @@
 import SwiftUI
 
 struct CarTechnicalInfoView: View {
+
+    let viewModel: CarTechnicalInfoVM
+
     var body: some View {
-        Text("Technical info")
+        CarTechnicalInfoCoordinatorView(
+            coordinator: viewModel.coordinator,
+            content: content
+        )
+    }
+
+    func content() -> some View {
+        Text("Car technical info")
     }
 }
 
 struct CarTechnicalInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        CarTechnicalInfoView()
+        CarTechnicalInfoView(
+            viewModel: .init(
+                coordinator: .init(
+                    deepLinkManager: .init()
+                )
+            )
+        )
     }
 }

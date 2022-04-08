@@ -23,15 +23,36 @@ final class CarDetailCoordinator: ObservableObject {
     }
 
     private func setupDeepLinking() {
-//        if case let .detailParametrized(carBrand, carModel) = deepLinkManager.currentInternalScreen {
-//            selectedLink = .detailParametrized(
-//                carBrand: carBrand,
-//                carModel: carModel
-//            )
-//        }
+        if case let .carDetailParametrized(_, _, detailNestedLink) = deepLinkManager.currentInternalScreen {
+            if detailNestedLink?.unparametrized == .carTechnicalInfo {
+                selectedLink = .carTechnicalInfo
+                deepLinkManager.currentInternalScreen = selectedLink
+            }
+        }
+    }
+
+    private func makeCarTechnicalInfoCoordinator(
+        preselectedLink: DeepLink?
+    ) -> CarTechnicalInfoCoordinator {
+        .init(
+            deepLinkManager: self.deepLinkManager,
+            preselectedLink: preselectedLink
+        )
     }
 
     func provideTechnicalInfoView() -> some View {
-        CarTechnicalInfoView()
+        var preselectedLink: DeepLink?
+
+        if
+            case let .carTechnicalInfoParametrized(nestedLink) = selectedLink
+        {
+            preselectedLink = nestedLink
+        }
+
+        return CarTechnicalInfoView(
+            viewModel: CarTechnicalInfoVM(
+                coordinator: makeCarTechnicalInfoCoordinator(preselectedLink: preselectedLink)
+            )
+        )
     }
 }

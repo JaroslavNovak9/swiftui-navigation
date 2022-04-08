@@ -26,11 +26,21 @@ final class CarsListCoordinator: ObservableObject {
             )
         }
 
-        if case .carTechnicalInfo = deepLinkManager.currentInternalScreen {
+        if case .carTechnicalInfo = deepLinkManager.currentInternalScreen?.unparametrized {
             selectedLink = .carDetailParametrized(
                 carBrand: "",
                 carModel: "",
                 nestedLink: .carTechnicalInfo
+            )
+        }
+
+        if case .carAssistance = deepLinkManager.currentInternalScreen?.unparametrized {
+            selectedLink = .carDetailParametrized(
+                carBrand: "",
+                carModel: "",
+                nestedLink: .carTechnicalInfoParametrized(
+                    nestedLink: .carAssistance
+                )
             )
         }
     }
