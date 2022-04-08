@@ -14,18 +14,35 @@ struct swiftui_deeplinkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .environmentObject(deepLinkManager)
-                .onOpenURL { url in
-                    // open link in safari: carapp://detail?carBrand=Nissan&carModel=Patrol
-
-                    // DEBUG
-                    if deepLinkManager.evaluateDeepLink(url: url) {
-                        print("From deep link")
-                    } else {
-                        print("Fall back")
+            TabView(
+                selection: $deepLinkManager.currentTab
+            ) {
+                Text("Home")
+                    .environmentObject(deepLinkManager)
+                    .tag(DeepLinkManager.Tab.home)
+                    .tabItem {
+                        Image(systemName: "house.fill")
                     }
+
+                CarsListView(
+                    viewModel: .init(
+                        carsListCoordinator: .init(deepLinkManager: deepLinkManager)
+                    )
+                )
+                .tag(DeepLinkManager.Tab.list)
+                .tabItem {
+                    Image(systemName: "car")
                 }
+            }
+            .environmentObject(deepLinkManager)
+            .onOpenURL { url in
+                // DEBUG
+                if deepLinkManager.evaluateDeepLink(url: url) {
+                    print("From deep link")
+                } else {
+                    print("Fall back")
+                }
+            }
         }
     }
 }
