@@ -10,11 +10,11 @@ import SwiftUI
 final class CarDetailCoordinator: ObservableObject {
 
     let deepLinkManager: DeepLinkManager
-    @Published var selectedLink: Flow?
+    @Published var selectedLink: DeepLink?
 
     init(
         deepLinkManager: DeepLinkManager,
-        preselectedLink: Flow? = nil
+        preselectedLink: DeepLink? = nil
     ) {
         self.deepLinkManager = deepLinkManager
         self.selectedLink = preselectedLink
@@ -33,29 +33,5 @@ final class CarDetailCoordinator: ObservableObject {
 
     func provideTechnicalInfoView() -> some View {
         CarTechnicalInfoView()
-    }
-}
-
-extension CarDetailCoordinator {
-    enum Flow: Hashable {
-        case technicalInfo
-    }
-}
-
-extension CarDetailCoordinator.Flow {
-    var navigationLink: Self {
-        switch self {
-        default:
-            return self
-        }
-    }
-}
-
-extension CarDetailCoordinator.Flow: Identifiable {
-    var id: String {
-        switch self {
-        case .technicalInfo:
-            return "technicalInfo"
-        }
     }
 }

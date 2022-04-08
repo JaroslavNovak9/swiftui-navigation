@@ -12,9 +12,9 @@ struct CarDetailCoordinatorView<Content: View>: View {
     @ObservedObject var coordinator: CarDetailCoordinator
     let content: () -> Content
 
-    private var selectedLink: Binding<CarDetailCoordinator.Flow?> {
+    private var selectedLink: Binding<DeepLink?> {
         Binding {
-            coordinator.selectedLink?.navigationLink
+            coordinator.selectedLink?.unparametrized
         } set: {
             coordinator.selectedLink = $0
         }
@@ -30,7 +30,7 @@ struct CarDetailCoordinatorView<Content: View>: View {
 
     private var navigationLinks: some View {
         NavigationLink(
-            tag: .technicalInfo,
+            tag: .carTechnicalInfo,
             selection: selectedLink,
             destination: coordinator.provideTechnicalInfoView
         ) {

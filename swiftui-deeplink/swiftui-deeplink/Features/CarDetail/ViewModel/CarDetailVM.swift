@@ -24,6 +24,6 @@ final class CarDetailVM {
     }
 
     func openTechnicalInfo() {
-        carDetailCoordinator.selectedLink = .technicalInfo
+        carDetailCoordinator.selectedLink = .carTechnicalInfo
     }
 }

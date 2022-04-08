@@ -10,7 +10,7 @@ import SwiftUI
 final class CarsListCoordinator: ObservableObject {
 
     let deepLinkManager: DeepLinkManager
-    @Published var selectedLink: Flow?
+    @Published var selectedLink: DeepLink?
 
     init(deepLinkManager: DeepLinkManager) {
         self.deepLinkManager = deepLinkManager
@@ -19,24 +19,24 @@ final class CarsListCoordinator: ObservableObject {
     }
 
     private func setupDeepLinking() {
-        if case let .detailParametrized(carBrand, carModel) = deepLinkManager.currentInternalScreen {
-            selectedLink = .detailParametrized(
+        if case let .carDetailParametrized(carBrand, carModel, _) = deepLinkManager.currentInternalScreen {
+            selectedLink = .carDetailParametrized(
                 carBrand: carBrand,
                 carModel: carModel
             )
         }
 
-        if case .technicalInfo = deepLinkManager.currentInternalScreen {
-            selectedLink = .detailParametrized(
+        if case .carTechnicalInfo = deepLinkManager.currentInternalScreen {
+            selectedLink = .carDetailParametrized(
                 carBrand: "",
                 carModel: "",
-                deepLink: .technicalInfo
+                nestedLink: .carTechnicalInfo
             )
         }
     }
 
     private func makeCarDetailCoordinator(
-        preselectedLink: CarDetailCoordinator.Flow?
+        preselectedLink: DeepLink?
     ) -> CarDetailCoordinator {
         .init(
             deepLinkManager: self.deepLinkManager,
@@ -47,61 +47,23 @@ final class CarsListCoordinator: ObservableObject {
     func provideDetailView() -> some View {
         var carBrandString: String?
         var carModelString: String?
-        var nestedLink: CarDetailCoordinator.Flow?
+        var preselectedLink: DeepLink?
 
         if
-            case let .detailParametrized(carBrand, carModel, deepLink) = selectedLink
+            case let .carDetailParametrized(carBrand, carModel, nestedLink) = selectedLink
         {
             carBrandString = carBrand
             carModelString = carModel
-
-            // TODO: - Add mapping
-            switch deepLink {
-            case .technicalInfo:
-                nestedLink = .technicalInfo
-            default:
-                break
-            }
+            preselectedLink = nestedLink
         }
 
         let viewModel: CarDetailVM = .init(
             carBrandString: carBrandString ?? "",
             carModelString: carModelString ?? "",
-            carDetailCoordinator: makeCarDetailCoordinator(preselectedLink: nestedLink)
+            carDetailCoordinator: makeCarDetailCoordinator(preselectedLink: preselectedLink)
         )
         let view: CarDetailView = .init(viewModel: viewModel)
 
         return view
-    }
-}
-
-extension CarsListCoordinator {
-    enum Flow: Hashable {
-        case detail
-        case detailParametrized(
-            carBrand: String,
-            carModel: String,
-            deepLink: DeepLinkManager.InternalScreens? = nil
-        )
-    }
-}
-
-extension CarsListCoordinator.Flow {
-    var navigationLink: Self {
-        switch self {
-        case .detailParametrized:
-            return .detail
-        default:
-            return self
-        }
-    }
-}
-
-extension CarsListCoordinator.Flow: Identifiable {
-    var id: String {
-        switch self {
-        case .detail, .detailParametrized:
-            return "detail"
-        }
     }
 }

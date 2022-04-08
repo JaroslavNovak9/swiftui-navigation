@@ -20,7 +20,7 @@ final class CarsListVM {
         carModel: String
     ) {
         // TODO: - Add published subject that sends signal for navigation with parameters
-        carsListCoordinator.selectedLink = .detailParametrized(
+        carsListCoordinator.selectedLink = .carDetailParametrized(
             carBrand: carBrand,
             carModel: carModel
         )
