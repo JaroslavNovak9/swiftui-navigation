@@ -5,7 +5,7 @@
 //  Created by Jaroslav Novák on 18.03.2022.
 //
 
-import Foundation
+import SwiftUI
 
 final class CarDetailCoordinator: ObservableObject {
 
@@ -29,6 +29,10 @@ final class CarDetailCoordinator: ObservableObject {
 //                carModel: carModel
 //            )
 //        }
+    }
+
+    func provideTechnicalInfoView() -> some View {
+        CarTechnicalInfoView()
     }
 }
 

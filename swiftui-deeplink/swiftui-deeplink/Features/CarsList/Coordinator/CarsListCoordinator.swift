@@ -34,6 +34,45 @@ final class CarsListCoordinator: ObservableObject {
             )
         }
     }
+
+    private func makeCarDetailCoordinator(
+        preselectedLink: CarDetailCoordinator.Flow?
+    ) -> CarDetailCoordinator {
+        .init(
+            deepLinkManager: self.deepLinkManager,
+            preselectedLink: preselectedLink
+        )
+    }
+
+    func provideDetailView() -> some View {
+        var carBrandString: String?
+        var carModelString: String?
+        var nestedLink: CarDetailCoordinator.Flow?
+
+        if
+            case let .detailParametrized(carBrand, carModel, deepLink) = selectedLink
+        {
+            carBrandString = carBrand
+            carModelString = carModel
+
+            // TODO: - Add mapping
+            switch deepLink {
+            case .technicalInfo:
+                nestedLink = .technicalInfo
+            default:
+                break
+            }
+        }
+
+        let viewModel: CarDetailVM = .init(
+            carBrandString: carBrandString ?? "",
+            carModelString: carModelString ?? "",
+            carDetailCoordinator: makeCarDetailCoordinator(preselectedLink: nestedLink)
+        )
+        let view: CarDetailView = .init(viewModel: viewModel)
+
+        return view
+    }
 }
 
 extension CarsListCoordinator {

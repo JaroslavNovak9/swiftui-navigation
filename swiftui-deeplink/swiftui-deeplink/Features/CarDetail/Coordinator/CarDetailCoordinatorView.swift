@@ -28,15 +28,11 @@ struct CarDetailCoordinatorView<Content: View>: View {
         }
     }
 
-    private func technicalInfoDestination() -> some View {
-        CarTechnicalInfoView()
-    }
-
     private var navigationLinks: some View {
         NavigationLink(
             tag: .technicalInfo,
             selection: selectedLink,
-            destination: technicalInfoDestination
+            destination: coordinator.provideTechnicalInfoView
         ) {
             EmptyView()
         }

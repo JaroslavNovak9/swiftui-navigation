@@ -30,44 +30,11 @@ struct CarsListCoordinatorView<Content: View>: View {
         }
     }
 
-    private func detailDestination() -> some View {
-        var carBrandString: String?
-        var carModelString: String?
-        var nestedLink: CarDetailCoordinator.Flow?
-
-        if
-            case let .detailParametrized(carBrand, carModel, deepLink) = coordinator.selectedLink
-        {
-            carBrandString = carBrand
-            carModelString = carModel
-
-            // TODO: - Add mapping
-            switch deepLink {
-            case .technicalInfo:
-                nestedLink = .technicalInfo
-            default:
-                break
-            }
-        }
-
-        let viewModel: CarDetailVM = .init(
-            carBrandString: carBrandString ?? "",
-            carModelString: carModelString ?? "",
-            carDetailCoordinator: .init(
-                deepLinkManager: .init(),
-                preselectedLink: nestedLink
-            )
-        )
-        let view: CarDetailView = .init(viewModel: viewModel)
-
-        return view
-    }
-
     private var navigationLinks: some View {
         NavigationLink(
             tag: .detail,
             selection: selectedLink,
-            destination: detailDestination
+            destination: coordinator.provideDetailView
         ) {
             EmptyView()
         }
