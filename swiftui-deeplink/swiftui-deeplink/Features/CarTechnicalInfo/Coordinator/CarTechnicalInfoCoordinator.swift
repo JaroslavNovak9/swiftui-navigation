@@ -5,36 +5,33 @@
 //  Created by Jaroslav Novák on 08.04.2022.
 //
 
+import Combine
 import SwiftUI
 
 final class CarTechnicalInfoCoordinator: ObservableObject {
 
-    let deepLinkManager: DeepLinkManager
-    @Published var selectedLink: DeepLink?
+    private var deepLink: DeepLink?
+    @Published var activeLink: ScreenLink?
 
-    init(
-        deepLinkManager: DeepLinkManager,
-        preselectedLink: DeepLink? = nil
-    ) {
-        self.deepLinkManager = deepLinkManager
-        self.selectedLink = preselectedLink
+    init(deepLink: DeepLink?) {
+        self.deepLink = deepLink
         // Setup
         setupDeepLinking()
     }
 
-    private func setupDeepLinking() {
-        if case let .carDetailParametrized(_, _, nestedLink: nestedLink) = deepLinkManager.currentInternalScreen {
-            if case let .carTechnicalInfoParametrized(technicalInfoNestedLink) = nestedLink {
-                if technicalInfoNestedLink?.unparametrized == .carAssistance {
-                    selectedLink = .carAssistance
-                    deepLinkManager.currentInternalScreen = selectedLink
-                }
-            }
-        }
-
-    }
-
     func provideCarAssistanceView() -> some View {
         CarAssistanceView()
+    }
+
+    private func setupDeepLinking() {
+        guard let deepLink = deepLink else {
+            return
+        }
+
+        if case let .carTechnicalInfoParametrized(technicalInfoNestedLink) = deepLink {
+            if technicalInfoNestedLink?.unparametrized == .carAssistance {
+                activeLink = .carAssistance
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CarsListView: View {
 
-    let viewModel: CarsListVM
+    @StateObject var viewModel: CarsListVM
 
     var body: some View {
         CarsListCoordinatorView(
@@ -20,15 +20,28 @@ struct CarsListView: View {
 
     // Content of current screen
     private func content() -> some View {
-        List(
-            viewModel.list,
-            id: \.id
-        ) { car in
-            detailLink(
-                id: car.id,
-                brand: car.brand.stringTitle,
-                model: car.model
-            )
+        VStack {
+            HStack {
+                Button {
+                    viewModel.openAssistance()
+                } label: {
+                    Text("Vehicle assistance")
+                }
+                .buttonStyle(.automatic)
+                Spacer()
+            }
+            .padding(.horizontal, 24)
+
+            List(
+                viewModel.list,
+                id: \.id
+            ) { car in
+                detailLink(
+                    id: car.id,
+                    brand: car.brand.stringTitle,
+                    model: car.model
+                )
+            }
         }
         .navigationTitle("Autopark")
     }

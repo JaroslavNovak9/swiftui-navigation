@@ -26,7 +26,9 @@ struct swiftui_deeplinkApp: App {
 
                 CarsListView(
                     viewModel: .init(
-                        carsListCoordinator: .init(deepLinkManager: deepLinkManager)
+                        carsListCoordinator: .init(
+                            deepLinkManager: deepLinkManager
+                        )
                     )
                 )
                 .tag(DeepLinkManager.Tab.list)

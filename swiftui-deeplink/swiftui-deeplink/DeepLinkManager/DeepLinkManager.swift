@@ -5,12 +5,22 @@
 //  Created by Jaroslav Novák on 17.03.2022.
 //
 
+import Combine
 import Foundation
+import UIKit
 
 final class DeepLinkManager: ObservableObject {
 
     @Published var currentTab: Tab = .home
-    @Published var currentInternalScreen: DeepLink?
+    @Published var activeDeepLink: DeepLink?
+
+    private var deepLinkSubject = PassthroughSubject<DeepLink?, Never>()
+    var outDeepLink: AnyPublisher<DeepLink?, Never> {
+        deepLinkSubject.eraseToAnyPublisher()
+    }
+
+    let deepLinkReachedDestination = PassthroughSubject<Void, Never>()
+    private var cancellables = Set<AnyCancellable>()
 
     func evaluateDeepLink(url: URL) -> Bool {
         guard let host = URLComponents(
@@ -51,10 +61,14 @@ final class DeepLinkManager: ObservableObject {
             let carBrand = queryItems.first(where: { $0.name == "carBrand" })?.value,
             let carModel = queryItems.first(where: { $0.name == "carModel" })?.value
         {
+            print("Making carDetail active")
+
             currentTab = .list
-            currentInternalScreen = .carDetailParametrized(
-                carBrand: carBrand,
-                carModel: carModel
+            deepLinkSubject.send(
+                .carDetailParametrized(
+                    carBrand: carBrand,
+                    carModel: carModel
+                )
             )
             return true
         }
@@ -63,11 +77,15 @@ final class DeepLinkManager: ObservableObject {
         if
             host == DeepLink.carTechnicalInfo.id
         {
+            print("Making carTechnicalInfo active")
+
             currentTab = .list
-            currentInternalScreen = .carDetailParametrized(
-                carBrand: "",
-                carModel: "",
-                nestedLink: .carTechnicalInfo
+            deepLinkSubject.send(
+                .carDetailParametrized(
+                    carBrand: "",
+                    carModel: "",
+                    nestedLink: .carTechnicalInfo
+                )
             )
             return true
         }
@@ -77,11 +95,13 @@ final class DeepLinkManager: ObservableObject {
             host == DeepLink.carAssistance.id
         {
             currentTab = .list
-            currentInternalScreen = .carDetailParametrized(
-                carBrand: "",
-                carModel: "",
-                nestedLink: .carTechnicalInfoParametrized(
-                    nestedLink: .carAssistance
+            deepLinkSubject.send(
+                .carDetailParametrized(
+                    carBrand: "",
+                    carModel: "",
+                    nestedLink: .carTechnicalInfoParametrized(
+                        nestedLink: .carAssistance
+                    )
                 )
             )
             return true

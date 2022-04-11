@@ -5,53 +5,44 @@
 //  Created by Jaroslav Novák on 18.03.2022.
 //
 
+import Combine
 import SwiftUI
 
 final class CarDetailCoordinator: ObservableObject {
 
-    let deepLinkManager: DeepLinkManager
-    @Published var selectedLink: DeepLink?
+    private var deepLink: DeepLink?
+    @Published var activeLink: ScreenLink?
 
-    init(
-        deepLinkManager: DeepLinkManager,
-        preselectedLink: DeepLink? = nil
-    ) {
-        self.deepLinkManager = deepLinkManager
-        self.selectedLink = preselectedLink
+    init(deepLink: DeepLink?) {
+        self.deepLink = deepLink
         // Setup
         setupDeepLinking()
     }
 
     private func setupDeepLinking() {
-        if case let .carDetailParametrized(_, _, detailNestedLink) = deepLinkManager.currentInternalScreen {
-            if detailNestedLink?.unparametrized == .carTechnicalInfo {
-                selectedLink = .carTechnicalInfo
-                deepLinkManager.currentInternalScreen = selectedLink
-            }
+        guard let deepLink = deepLink else {
+            return
+        }
+
+        if case let .carTechnicalInfoParametrized(deepLink) = deepLink {
+            activeLink = .carTechnicalInfoParametrized(
+                deepLink: deepLink
+            )
+        } else if .carTechnicalInfo == deepLink {
+            activeLink = .carTechnicalInfo
         }
     }
 
-    private func makeCarTechnicalInfoCoordinator(
-        preselectedLink: DeepLink?
-    ) -> CarTechnicalInfoCoordinator {
+    private func makeCarTechnicalInfoCoordinator() -> CarTechnicalInfoCoordinator {
         .init(
-            deepLinkManager: self.deepLinkManager,
-            preselectedLink: preselectedLink
+            deepLink: deepLink
         )
     }
 
     func provideTechnicalInfoView() -> some View {
-        var preselectedLink: DeepLink?
-
-        if
-            case let .carTechnicalInfoParametrized(nestedLink) = selectedLink
-        {
-            preselectedLink = nestedLink
-        }
-
-        return CarTechnicalInfoView(
-            viewModel: CarTechnicalInfoVM(
-                coordinator: makeCarTechnicalInfoCoordinator(preselectedLink: preselectedLink)
+        CarTechnicalInfoView(
+            viewModel: .init(
+                coordinator: self.makeCarTechnicalInfoCoordinator()
             )
         )
     }

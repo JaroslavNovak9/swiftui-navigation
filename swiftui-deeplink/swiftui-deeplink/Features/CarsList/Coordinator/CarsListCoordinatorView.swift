@@ -12,11 +12,11 @@ struct CarsListCoordinatorView<Content: View>: View {
     @ObservedObject var coordinator: CarsListCoordinator
     let content: () -> Content
 
-    private var selectedLink: Binding<DeepLink?> {
+    private var activeLink: Binding<CarsListCoordinator.ScreenLink?> {
         Binding {
-            coordinator.selectedLink?.unparametrized
+            coordinator.activeLink?.unparametrized
         } set: {
-            coordinator.selectedLink = $0
+            coordinator.activeLink = $0
         }
     }
 
@@ -31,12 +31,18 @@ struct CarsListCoordinatorView<Content: View>: View {
     }
 
     private var navigationLinks: some View {
-        NavigationLink(
-            tag: .carDetail,
-            selection: selectedLink,
-            destination: coordinator.provideDetailView
-        ) {
-            EmptyView()
+        Group {
+            NavigationLink(
+                tag: .carDetail,
+                selection: activeLink,
+                destination: coordinator.provideDetailView
+            ) { EmptyView() }
+
+            NavigationLink(
+                tag: .carAssistance,
+                selection: activeLink,
+                destination: coordinator.provideAssistanceView
+            ) { EmptyView() }
         }
     }
 }

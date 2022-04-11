@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CarDetailVM {
+final class CarDetailVM: ObservableObject {
 
     let carBrandString: String
     let carModelString: String
@@ -24,6 +24,6 @@ final class CarDetailVM {
     }
 
     func openTechnicalInfo() {
-        carDetailCoordinator.selectedLink = .carTechnicalInfo
+        carDetailCoordinator.activeLink = .carTechnicalInfo
     }
 }

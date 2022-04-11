@@ -11,7 +11,7 @@ struct CarDetailView: View {
 
     @Environment(\.presentationMode) private var presentationMode
 
-    let viewModel: CarDetailVM
+    @StateObject var viewModel: CarDetailVM
 
     var body: some View {
         CarDetailCoordinatorView(
@@ -125,7 +125,7 @@ struct CarDetailView_Previews: PreviewProvider {
                 carBrandString: "BMW",
                 carModelString: "e46",
                 carDetailCoordinator: .init(
-                    deepLinkManager: .init()
+                    deepLink: nil
                 )
             )
         )

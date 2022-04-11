@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CarTechnicalInfoVM {
+final class CarTechnicalInfoVM: ObservableObject {
 
     let coordinator: CarTechnicalInfoCoordinator
 
@@ -16,6 +16,6 @@ final class CarTechnicalInfoVM {
     }
 
     func openCarAssistance() {
-        coordinator.selectedLink = .carAssistance
+        coordinator.activeLink = .carAssistance
     }
 }

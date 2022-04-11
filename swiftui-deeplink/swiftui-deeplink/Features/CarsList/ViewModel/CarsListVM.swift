@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CarsListVM {
+final class CarsListVM: ObservableObject {
 
     let carsListCoordinator: CarsListCoordinator
 
@@ -20,10 +20,14 @@ final class CarsListVM {
         carModel: String
     ) {
         // TODO: - Add published subject that sends signal for navigation with parameters
-        carsListCoordinator.selectedLink = .carDetailParametrized(
+        carsListCoordinator.activeLink = .carDetailParametrized(
             carBrand: carBrand,
             carModel: carModel
         )
+    }
+
+    func openAssistance() {
+        carsListCoordinator.activeLink = .carAssistance
     }
 }
 

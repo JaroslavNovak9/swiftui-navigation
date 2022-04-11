@@ -24,6 +24,9 @@
 		CD99498028007A0000D54D2E /* CarTechnicalInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD99497F28007A0000D54D2E /* CarTechnicalInfoCoordinator.swift */; };
 		CD99498228007A1D00D54D2E /* CarTechnicalInfoCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD99498128007A1D00D54D2E /* CarTechnicalInfoCoordinatorView.swift */; };
 		CD99498528007DAC00D54D2E /* CarTechnicalInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD99498428007DAC00D54D2E /* CarTechnicalInfoVM.swift */; };
+		CD994987280411B700D54D2E /* CarsListCoordinator+ScreenLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD994986280411B700D54D2E /* CarsListCoordinator+ScreenLink.swift */; };
+		CD99498928041A4C00D54D2E /* CarDetailCoordinator+ScreenLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD99498828041A4C00D54D2E /* CarDetailCoordinator+ScreenLink.swift */; };
+		CD99498B2804229900D54D2E /* CarTechnicalInfoCoordinator+ScreenLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD99498A2804229900D54D2E /* CarTechnicalInfoCoordinator+ScreenLink.swift */; };
 		CDB2C46F27E4CE1D005B7B96 /* CarTechnicalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB2C46E27E4CE1D005B7B96 /* CarTechnicalInfoView.swift */; };
 		CDB2C47227E4CEAC005B7B96 /* CarDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB2C47127E4CEAC005B7B96 /* CarDetailCoordinator.swift */; };
 		CDB2C47527E4CFB6005B7B96 /* CarDetailCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB2C47427E4CFB6005B7B96 /* CarDetailCoordinatorView.swift */; };
@@ -49,6 +52,9 @@
 		CD99497F28007A0000D54D2E /* CarTechnicalInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTechnicalInfoCoordinator.swift; sourceTree = "<group>"; };
 		CD99498128007A1D00D54D2E /* CarTechnicalInfoCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTechnicalInfoCoordinatorView.swift; sourceTree = "<group>"; };
 		CD99498428007DAC00D54D2E /* CarTechnicalInfoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTechnicalInfoVM.swift; sourceTree = "<group>"; };
+		CD994986280411B700D54D2E /* CarsListCoordinator+ScreenLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarsListCoordinator+ScreenLink.swift"; sourceTree = "<group>"; };
+		CD99498828041A4C00D54D2E /* CarDetailCoordinator+ScreenLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarDetailCoordinator+ScreenLink.swift"; sourceTree = "<group>"; };
+		CD99498A2804229900D54D2E /* CarTechnicalInfoCoordinator+ScreenLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarTechnicalInfoCoordinator+ScreenLink.swift"; sourceTree = "<group>"; };
 		CDB2C46E27E4CE1D005B7B96 /* CarTechnicalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTechnicalInfoView.swift; sourceTree = "<group>"; };
 		CDB2C47127E4CEAC005B7B96 /* CarDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailCoordinator.swift; sourceTree = "<group>"; };
 		CDB2C47427E4CFB6005B7B96 /* CarDetailCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailCoordinatorView.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 		CD04BF9E27E460C400833DF1 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				CD994986280411B700D54D2E /* CarsListCoordinator+ScreenLink.swift */,
 				CD04BF9F27E460D700833DF1 /* CarsListCoordinator.swift */,
 				CD04BFA127E461F500833DF1 /* CarsListCoordinatorView.swift */,
 			);
@@ -209,6 +216,7 @@
 		CD99497E280079EF00D54D2E /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				CD99498A2804229900D54D2E /* CarTechnicalInfoCoordinator+ScreenLink.swift */,
 				CD99497F28007A0000D54D2E /* CarTechnicalInfoCoordinator.swift */,
 				CD99498128007A1D00D54D2E /* CarTechnicalInfoCoordinatorView.swift */,
 			);
@@ -226,8 +234,8 @@
 		CDB2C46B27E4CD93005B7B96 /* CarTechnicalInfo */ = {
 			isa = PBXGroup;
 			children = (
-				CD99498328007D9E00D54D2E /* ViewModel */,
 				CD99497E280079EF00D54D2E /* Coordinator */,
+				CD99498328007D9E00D54D2E /* ViewModel */,
 				CDB2C46D27E4CE0A005B7B96 /* View */,
 			);
 			path = CarTechnicalInfo;
@@ -255,6 +263,7 @@
 		CDB2C47027E4CE68005B7B96 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				CD99498828041A4C00D54D2E /* CarDetailCoordinator+ScreenLink.swift */,
 				CDB2C47127E4CEAC005B7B96 /* CarDetailCoordinator.swift */,
 				CDB2C47427E4CFB6005B7B96 /* CarDetailCoordinatorView.swift */,
 			);
@@ -341,12 +350,15 @@
 				CD99498528007DAC00D54D2E /* CarTechnicalInfoVM.swift in Sources */,
 				CD99497D2800787D00D54D2E /* CarAssistanceView.swift in Sources */,
 				CD99498028007A0000D54D2E /* CarTechnicalInfoCoordinator.swift in Sources */,
+				CD99498928041A4C00D54D2E /* CarDetailCoordinator+ScreenLink.swift in Sources */,
 				CD04BF7427E3905000833DF1 /* swiftui_deeplinkApp.swift in Sources */,
 				CD04BF8627E3913900833DF1 /* CarBrand.swift in Sources */,
 				CD04BF8427E3909E00833DF1 /* Car.swift in Sources */,
+				CD99498B2804229900D54D2E /* CarTechnicalInfoCoordinator+ScreenLink.swift in Sources */,
 				CDB2C46F27E4CE1D005B7B96 /* CarTechnicalInfoView.swift in Sources */,
 				CD04BFA027E460D700833DF1 /* CarsListCoordinator.swift in Sources */,
 				CD9949772800713600D54D2E /* DeepLink.swift in Sources */,
+				CD994987280411B700D54D2E /* CarsListCoordinator+ScreenLink.swift in Sources */,
 				CDB2C47227E4CEAC005B7B96 /* CarDetailCoordinator.swift in Sources */,
 				CD04BF8E27E3921000833DF1 /* CarsListView.swift in Sources */,
 			);

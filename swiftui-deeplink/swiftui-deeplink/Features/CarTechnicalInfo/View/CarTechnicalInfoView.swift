@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CarTechnicalInfoView: View {
 
-    let viewModel: CarTechnicalInfoVM
+    @StateObject var viewModel: CarTechnicalInfoVM
 
     var body: some View {
         CarTechnicalInfoCoordinatorView(
@@ -28,7 +28,7 @@ struct CarTechnicalInfoView_Previews: PreviewProvider {
         CarTechnicalInfoView(
             viewModel: .init(
                 coordinator: .init(
-                    deepLinkManager: .init()
+                    deepLink: nil
                 )
             )
         )

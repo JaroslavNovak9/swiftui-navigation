@@ -12,11 +12,11 @@ struct CarDetailCoordinatorView<Content: View>: View {
     @ObservedObject var coordinator: CarDetailCoordinator
     let content: () -> Content
 
-    private var selectedLink: Binding<DeepLink?> {
+    private var activeLink: Binding<CarDetailCoordinator.ScreenLink?> {
         Binding {
-            coordinator.selectedLink?.unparametrized
+            coordinator.activeLink?.unparametrized
         } set: {
-            coordinator.selectedLink = $0
+            coordinator.activeLink = $0
         }
     }
 
@@ -31,7 +31,7 @@ struct CarDetailCoordinatorView<Content: View>: View {
     private var navigationLinks: some View {
         NavigationLink(
             tag: .carTechnicalInfo,
-            selection: selectedLink,
+            selection: activeLink,
             destination: coordinator.provideTechnicalInfoView
         ) {
             EmptyView()
@@ -43,7 +43,7 @@ struct CarDetailCoordinatorView_Previews: PreviewProvider {
     static var previews: some View {
         CarDetailCoordinatorView(
             coordinator: .init(
-                deepLinkManager: .init()
+                deepLink: nil
             ),
             content: { EmptyView() }
         )

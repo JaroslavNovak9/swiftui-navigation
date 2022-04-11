@@ -5,12 +5,15 @@
 //  Created by Jaroslav Novák on 18.03.2022.
 //
 
+import Combine
 import SwiftUI
 
 final class CarsListCoordinator: ObservableObject {
 
-    let deepLinkManager: DeepLinkManager
-    @Published var selectedLink: DeepLink?
+    private let deepLinkManager: DeepLinkManager
+    private var cancellables = Set<AnyCancellable>()
+
+    @Published var activeLink: CarsListCoordinator.ScreenLink?
 
     init(deepLinkManager: DeepLinkManager) {
         self.deepLinkManager = deepLinkManager
@@ -19,60 +22,56 @@ final class CarsListCoordinator: ObservableObject {
     }
 
     private func setupDeepLinking() {
-        if case let .carDetailParametrized(carBrand, carModel, _) = deepLinkManager.currentInternalScreen {
-            selectedLink = .carDetailParametrized(
-                carBrand: carBrand,
-                carModel: carModel
-            )
-        }
+        deepLinkManager
+            .outDeepLink
+            .sink { [weak self] deepLink in
+                guard let deepLink = deepLink else { return }
 
-        if case .carTechnicalInfo = deepLinkManager.currentInternalScreen?.unparametrized {
-            selectedLink = .carDetailParametrized(
-                carBrand: "",
-                carModel: "",
-                nestedLink: .carTechnicalInfo
-            )
-        }
-
-        if case .carAssistance = deepLinkManager.currentInternalScreen?.unparametrized {
-            selectedLink = .carDetailParametrized(
-                carBrand: "",
-                carModel: "",
-                nestedLink: .carTechnicalInfoParametrized(
-                    nestedLink: .carAssistance
-                )
-            )
-        }
+                if case let .carDetailParametrized(carBrand, carModel, deepLink) = deepLink {
+                    self?.activeLink = .carDetailParametrized(
+                        carBrand: carBrand,
+                        carModel: carModel,
+                        deepLink: deepLink
+                    )
+                }
+            }
+            .store(in: &cancellables)
     }
 
     private func makeCarDetailCoordinator(
-        preselectedLink: DeepLink?
+        deepLink: DeepLink?
     ) -> CarDetailCoordinator {
         .init(
-            deepLinkManager: self.deepLinkManager,
-            preselectedLink: preselectedLink
+            deepLink: deepLink
         )
     }
 
     func provideDetailView() -> some View {
         var carBrandString: String?
         var carModelString: String?
-        var preselectedLink: DeepLink?
+        var preselectedDeepLink: DeepLink?
 
         if
-            case let .carDetailParametrized(carBrand, carModel, nestedLink) = selectedLink
+            case let .carDetailParametrized(carBrand, carModel, deepLink) = activeLink
         {
             carBrandString = carBrand
             carModelString = carModel
-            preselectedLink = nestedLink
+            preselectedDeepLink = deepLink
         }
 
         let viewModel: CarDetailVM = .init(
             carBrandString: carBrandString ?? "",
             carModelString: carModelString ?? "",
-            carDetailCoordinator: makeCarDetailCoordinator(preselectedLink: preselectedLink)
+            carDetailCoordinator: makeCarDetailCoordinator(
+                deepLink: preselectedDeepLink
+            )
         )
         let view: CarDetailView = .init(viewModel: viewModel)
+        return view
+    }
+
+    func provideAssistanceView() -> some View {
+        let view: CarAssistanceView = .init()
 
         return view
     }
