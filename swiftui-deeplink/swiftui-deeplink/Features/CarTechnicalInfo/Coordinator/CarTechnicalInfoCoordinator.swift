@@ -13,22 +13,15 @@ final class CarTechnicalInfoCoordinator: ObservableObject {
     private var deepLink: DeepLink?
     @Published var activeLink: ScreenLink?
 
+// MARK: - Init
+
     init(deepLink: DeepLink?) {
         self.deepLink = deepLink
         // Setup
         setupDeepLinking()
     }
 
-    func provideCoordinatorView<T: View>(for content: @escaping () -> T) -> some View {
-        CarTechnicalInfoCoordinatorView(
-            coordinator: self,
-            content: content
-        )
-    }
-
-    func provideCarAssistanceView() -> some View {
-        CarAssistanceView()
-    }
+// MARK: - Bindings
 
     private func setupDeepLinking() {
         guard let deepLink = deepLink else {
@@ -40,5 +33,18 @@ final class CarTechnicalInfoCoordinator: ObservableObject {
                 activeLink = .carAssistance
             }
         }
+    }
+
+// MARK: - Making Views
+
+    func provideCoordinatorView<T: View>(for content: @escaping () -> T) -> some View {
+        CarTechnicalInfoCoordinatorView(
+            coordinator: self,
+            content: content
+        )
+    }
+
+    func provideCarAssistanceView() -> some View {
+        CarAssistanceView()
     }
 }

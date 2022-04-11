@@ -16,12 +16,16 @@ final class CarsListCoordinator: ObservableObject {
     let activeLinkSubject = PassthroughSubject<CarsListCoordinator.ScreenLink?, Never>()
     private var cancellables = Set<AnyCancellable>()
 
+// MARK: - Init
+
     init(deepLinkManager: DeepLinkManager) {
         self.deepLinkManager = deepLinkManager
         // Setup
         setupBindings()
         setupDeepLinking()
     }
+
+// MARK: - Bindings
 
     private func setupBindings() {
         activeLinkSubject
@@ -48,12 +52,7 @@ final class CarsListCoordinator: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func provideCoordinatorView<T: View>(for content: @escaping () -> T) -> some View {
-        CarsListCoordinatorView(
-            coordinator: self,
-            content: content
-        )
-    }
+// MARK: - Making coordinators
 
     private func makeCarDetailCoordinator(
         deepLink: DeepLink?
@@ -61,6 +60,21 @@ final class CarsListCoordinator: ObservableObject {
         .init(
             deepLink: deepLink
         )
+    }
+
+// MARK: - Making views
+
+    func provideCoordinatorView<T: View>(for content: @escaping () -> T) -> some View {
+        CarsListCoordinatorView(
+            coordinator: self,
+            content: content
+        )
+    }
+
+    func provideAssistanceView() -> some View {
+        let view: CarAssistanceView = .init()
+
+        return view
     }
 
     func provideDetailView() -> some View {
@@ -84,12 +98,6 @@ final class CarsListCoordinator: ObservableObject {
             )
         )
         let view: CarDetailView = .init(viewModel: viewModel)
-        return view
-    }
-
-    func provideAssistanceView() -> some View {
-        let view: CarAssistanceView = .init()
-
         return view
     }
 }
