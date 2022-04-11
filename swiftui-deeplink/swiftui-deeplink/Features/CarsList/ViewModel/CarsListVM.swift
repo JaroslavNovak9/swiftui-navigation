@@ -9,25 +9,32 @@ import Foundation
 
 final class CarsListVM: ObservableObject {
 
-    let carsListCoordinator: CarsListCoordinator
+    let coordinator: CarsListCoordinator
 
-    init(carsListCoordinator: CarsListCoordinator) {
-        self.carsListCoordinator = carsListCoordinator
+    init(coordinator: CarsListCoordinator) {
+        self.coordinator = coordinator
     }
 
     func openDetail(
         carBrand: String,
         carModel: String
     ) {
-        // TODO: - Add published subject that sends signal for navigation with parameters
-        carsListCoordinator.activeLink = .carDetailParametrized(
-            carBrand: carBrand,
-            carModel: carModel
-        )
+        coordinator
+            .activeLinkSubject
+            .send(
+                .carDetailParametrized(
+                    carBrand: carBrand,
+                    carModel: carModel
+                )
+            )
     }
 
     func openAssistance() {
-        carsListCoordinator.activeLink = .carAssistance
+        coordinator
+            .activeLinkSubject
+            .send(
+                .carAssistance
+            )
     }
 }
 

@@ -39,6 +39,13 @@ final class CarDetailCoordinator: ObservableObject {
         )
     }
 
+    func provideCoordinatorView<T: View>(for content: @escaping () -> T) -> some View {
+        CarDetailCoordinatorView(
+            coordinator: self,
+            content: content
+        )
+    }
+
     func provideTechnicalInfoView() -> some View {
         CarTechnicalInfoView(
             viewModel: .init(

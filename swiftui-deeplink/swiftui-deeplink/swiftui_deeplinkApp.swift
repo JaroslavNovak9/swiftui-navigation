@@ -26,7 +26,7 @@ struct swiftui_deeplinkApp: App {
 
                 CarsListView(
                     viewModel: .init(
-                        carsListCoordinator: .init(
+                        coordinator: .init(
                             deepLinkManager: deepLinkManager
                         )
                     )

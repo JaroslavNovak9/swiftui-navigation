@@ -14,10 +14,7 @@ struct CarDetailView: View {
     @StateObject var viewModel: CarDetailVM
 
     var body: some View {
-        CarDetailCoordinatorView(
-            coordinator: viewModel.carDetailCoordinator,
-            content: content
-        )
+        viewModel.coordinator.provideCoordinatorView(for: content)
     }
 
     private func content() -> some View {
@@ -124,7 +121,7 @@ struct CarDetailView_Previews: PreviewProvider {
             viewModel: .init(
                 carBrandString: "BMW",
                 carModelString: "e46",
-                carDetailCoordinator: .init(
+                coordinator: .init(
                     deepLink: nil
                 )
             )

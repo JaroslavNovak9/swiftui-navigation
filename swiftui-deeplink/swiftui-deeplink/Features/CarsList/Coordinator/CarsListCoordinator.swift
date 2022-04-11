@@ -10,15 +10,25 @@ import SwiftUI
 
 final class CarsListCoordinator: ObservableObject {
 
-    private let deepLinkManager: DeepLinkManager
-    private var cancellables = Set<AnyCancellable>()
-
     @Published var activeLink: CarsListCoordinator.ScreenLink?
+    private let deepLinkManager: DeepLinkManager
+
+    let activeLinkSubject = PassthroughSubject<CarsListCoordinator.ScreenLink?, Never>()
+    private var cancellables = Set<AnyCancellable>()
 
     init(deepLinkManager: DeepLinkManager) {
         self.deepLinkManager = deepLinkManager
         // Setup
+        setupBindings()
         setupDeepLinking()
+    }
+
+    private func setupBindings() {
+        activeLinkSubject
+            .sink { [weak self] requestedLink in
+                self?.activeLink = requestedLink
+            }
+            .store(in: &cancellables)
     }
 
     private func setupDeepLinking() {
@@ -36,6 +46,13 @@ final class CarsListCoordinator: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+    }
+
+    func provideCoordinatorView<T: View>(for content: @escaping () -> T) -> some View {
+        CarsListCoordinatorView(
+            coordinator: self,
+            content: content
+        )
     }
 
     private func makeCarDetailCoordinator(
@@ -62,7 +79,7 @@ final class CarsListCoordinator: ObservableObject {
         let viewModel: CarDetailVM = .init(
             carBrandString: carBrandString ?? "",
             carModelString: carModelString ?? "",
-            carDetailCoordinator: makeCarDetailCoordinator(
+            coordinator: makeCarDetailCoordinator(
                 deepLink: preselectedDeepLink
             )
         )

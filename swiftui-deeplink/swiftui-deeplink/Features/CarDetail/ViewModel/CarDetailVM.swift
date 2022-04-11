@@ -11,19 +11,19 @@ final class CarDetailVM: ObservableObject {
 
     let carBrandString: String
     let carModelString: String
-    let carDetailCoordinator: CarDetailCoordinator
+    let coordinator: CarDetailCoordinator
 
     init(
         carBrandString: String,
         carModelString: String,
-        carDetailCoordinator: CarDetailCoordinator
+        coordinator: CarDetailCoordinator
     ) {
         self.carBrandString = carBrandString
         self.carModelString = carModelString
-        self.carDetailCoordinator = carDetailCoordinator
+        self.coordinator = coordinator
     }
 
     func openTechnicalInfo() {
-        carDetailCoordinator.activeLink = .carTechnicalInfo
+        coordinator.activeLink = .carTechnicalInfo
     }
 }

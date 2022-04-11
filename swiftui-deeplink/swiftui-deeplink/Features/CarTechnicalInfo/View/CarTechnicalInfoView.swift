@@ -12,10 +12,7 @@ struct CarTechnicalInfoView: View {
     @StateObject var viewModel: CarTechnicalInfoVM
 
     var body: some View {
-        CarTechnicalInfoCoordinatorView(
-            coordinator: viewModel.coordinator,
-            content: content
-        )
+        viewModel.coordinator.provideCoordinatorView(for: content)
     }
 
     func content() -> some View {

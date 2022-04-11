@@ -244,10 +244,10 @@
 		CDB2C46C27E4CDE1005B7B96 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				CD9949782800784700D54D2E /* CarAssistance */,
 				CD04BF8127E3908200833DF1 /* CarsList */,
 				CD04BF8F27E392DD00833DF1 /* CarDetail */,
 				CDB2C46B27E4CD93005B7B96 /* CarTechnicalInfo */,
+				CD9949782800784700D54D2E /* CarAssistance */,
 			);
 			path = Features;
 			sourceTree = "<group>";

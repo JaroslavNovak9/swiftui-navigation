@@ -19,6 +19,13 @@ final class CarTechnicalInfoCoordinator: ObservableObject {
         setupDeepLinking()
     }
 
+    func provideCoordinatorView<T: View>(for content: @escaping () -> T) -> some View {
+        CarTechnicalInfoCoordinatorView(
+            coordinator: self,
+            content: content
+        )
+    }
+
     func provideCarAssistanceView() -> some View {
         CarAssistanceView()
     }

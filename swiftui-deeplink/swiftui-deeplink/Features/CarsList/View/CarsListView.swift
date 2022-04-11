@@ -12,10 +12,7 @@ struct CarsListView: View {
     @StateObject var viewModel: CarsListVM
 
     var body: some View {
-        CarsListCoordinatorView(
-            coordinator: viewModel.carsListCoordinator,
-            content: content
-        )
+        viewModel.coordinator.provideCoordinatorView(for: content)
     }
 
     // Content of current screen
@@ -66,7 +63,7 @@ struct CarsListView_Previews: PreviewProvider {
     static var previews: some View {
         CarsListView(
             viewModel: .init(
-                carsListCoordinator: .init(
+                coordinator: .init(
                     deepLinkManager: .init()
                 )
             )
