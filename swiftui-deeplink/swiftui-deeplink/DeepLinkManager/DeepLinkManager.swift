@@ -66,6 +66,8 @@ final class DeepLinkManager: ObservableObject {
             return false
         }
 
+        // Nested 1 view deep:
+        //
         // carapp://carDetail?carBrand=Nissan&carModel=Patrol
         if
             host == DeepLink.carDetail.id,
@@ -73,8 +75,6 @@ final class DeepLinkManager: ObservableObject {
             let carBrand = queryItems.first(where: { $0.name == "carBrand" })?.value,
             let carModel = queryItems.first(where: { $0.name == "carModel" })?.value
         {
-            print("Making carDetail active")
-
             currentTab = .list
             deepLinkSubject.send(
                 .carDetailParametrized(
@@ -85,40 +85,27 @@ final class DeepLinkManager: ObservableObject {
             return true
         }
 
+        // Nested 2 views deep:
+        //
         // carapp://carTechnicalInfo
         if
             host == DeepLink.carTechnicalInfo.id
         {
-            print("Making carTechnicalInfo active")
-
             currentTab = .list
-//            deepLinkSubject.send(
-//                .carDetailParametrized(
-//                    carBrand: "",
-//                    carModel: "",
-//                    nestedLink: .carTechnicalInfo
-//                )
-//            )
             deepLinkSubject
                 .send(
-//                    .carDetailParametrized(
-//                        carBrand: "",
-//                        carModel: "",
-//                        nestedLink: .carTechnicalInfoParametrized(
-//                            nestedLink: .carAssistanceParametrized(nestedLink: .carTechnicalInfo)
-//                        )
-//                    )
                     .carDetailParametrized(
                         carBrand: "",
                         carModel: "",
-                        nestedLink: .carAssistanceParametrized(
-                            nestedLink: .carTechnicalInfo
-                        )
+                        nestedLink: .carTechnicalInfo
                     )
                 )
+
             return true
         }
 
+        // Nested 3 views deep:
+        //
         // carapp://carAssistance
         if
             host == DeepLink.carAssistance.id
@@ -133,14 +120,7 @@ final class DeepLinkManager: ObservableObject {
                     )
                 )
             )
-//            deepLinkSubject
-//                .send(
-//                    .carDetailParametrized(
-//                        carBrand: "",
-//                        carModel: "",
-//                        nestedLink: .carAssistance
-//                    )
-//                )
+
             return true
         }
 

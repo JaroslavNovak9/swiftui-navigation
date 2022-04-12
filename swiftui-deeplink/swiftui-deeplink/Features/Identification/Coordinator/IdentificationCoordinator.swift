@@ -33,8 +33,6 @@ final class IdentificationCoordinator: ObservableObject {
             .sink { [weak self] deepLink in
                 guard let deepLink = deepLink else { return }
 
-                print("ZDE catched first \(deepLink)")
-
                 self?.savedDeepLink = deepLink
             }
             .store(in: &cancellables)

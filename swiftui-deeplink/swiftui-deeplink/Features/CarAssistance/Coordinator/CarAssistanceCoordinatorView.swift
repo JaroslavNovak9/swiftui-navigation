@@ -14,8 +14,7 @@ struct CarAssistanceCoordinatorView<Content: View>: View {
 
     private var activeLink: Binding<CarAssistanceCoordinator.ScreenLink?> {
         Binding {
-            print("From view: ", coordinator.activeLink)
-            return coordinator.activeLink?.unparametrized
+            coordinator.activeLink?.unparametrized
         } set: {
             coordinator.activeLink = $0
         }
