@@ -92,13 +92,19 @@ final class DeepLinkManager: ObservableObject {
             print("Making carTechnicalInfo active")
 
             currentTab = .list
-            deepLinkSubject.send(
-                .carDetailParametrized(
-                    carBrand: "",
-                    carModel: "",
-                    nestedLink: .carTechnicalInfo
+//            deepLinkSubject.send(
+//                .carDetailParametrized(
+//                    carBrand: "",
+//                    carModel: "",
+//                    nestedLink: .carTechnicalInfo
+//                )
+//            )
+            deepLinkSubject
+                .send(
+                    .carTechnicalInfoParametrized(
+                        nestedLink: .carAssistance
+                    )
                 )
-            )
             return true
         }
 
@@ -116,6 +122,14 @@ final class DeepLinkManager: ObservableObject {
                     )
                 )
             )
+//            deepLinkSubject
+//                .send(
+//                    .carDetailParametrized(
+//                        carBrand: "",
+//                        carModel: "",
+//                        nestedLink: .carAssistance
+//                    )
+//                )
             return true
         }
 

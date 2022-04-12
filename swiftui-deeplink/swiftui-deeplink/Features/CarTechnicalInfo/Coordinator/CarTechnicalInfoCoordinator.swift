@@ -30,8 +30,8 @@ final class CarTechnicalInfoCoordinator: ObservableObject {
 
         print("ZDE \(deepLink.unparametrized)")
 
-        if deepLink.unparametrized == .carAssistance {
-            print("Setting up active link")
+        if .carAssistance == deepLink.unparametrized {
+            print("Making internal assistance")
             activeLink = .carAssistance
         }
     }

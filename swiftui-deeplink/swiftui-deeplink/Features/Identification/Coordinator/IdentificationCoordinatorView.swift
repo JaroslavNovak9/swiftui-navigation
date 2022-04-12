@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IdentificationCoordinatorView<Content: View>: View {
 
-    @ObservedObject var coordinator: IdentificationCoordinator
+    @StateObject var coordinator: IdentificationCoordinator
     let content: () -> Content
 
     private var activeLink: Binding<IdentificationCoordinator.ScreenLink?> {

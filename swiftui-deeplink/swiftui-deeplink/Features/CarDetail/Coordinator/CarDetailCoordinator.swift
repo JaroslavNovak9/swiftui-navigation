@@ -34,6 +34,8 @@ final class CarDetailCoordinator: ObservableObject {
             )
         } else if .carTechnicalInfo == deepLink {
             activeLink = .carTechnicalInfo
+        } else if .carAssistance == deepLink {
+            activeLink = .carAssistance
         }
     }
 
@@ -72,5 +74,9 @@ final class CarDetailCoordinator: ObservableObject {
                 )
             )
         )
+    }
+
+    func provideCarAssistanceView() -> some View {
+        CarAssistanceView()
     }
 }

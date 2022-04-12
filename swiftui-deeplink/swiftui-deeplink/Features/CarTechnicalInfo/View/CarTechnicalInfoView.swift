@@ -15,7 +15,7 @@ struct CarTechnicalInfoView: View {
         viewModel.coordinator.provideCoordinatorView(for: content)
     }
 
-    func content() -> some View {
+    private func content() -> some View {
         VStack {
             Text("Car technical info")
 

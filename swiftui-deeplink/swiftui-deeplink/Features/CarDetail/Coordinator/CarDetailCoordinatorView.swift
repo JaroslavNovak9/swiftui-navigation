@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CarDetailCoordinatorView<Content: View>: View {
 
-    @ObservedObject var coordinator: CarDetailCoordinator
+    @StateObject var coordinator: CarDetailCoordinator
     let content: () -> Content
 
     private var activeLink: Binding<CarDetailCoordinator.ScreenLink?> {
@@ -29,12 +29,18 @@ struct CarDetailCoordinatorView<Content: View>: View {
     }
 
     private var navigationLinks: some View {
-        NavigationLink(
-            tag: .carTechnicalInfo,
-            selection: activeLink,
-            destination: coordinator.provideTechnicalInfoView
-        ) {
-            EmptyView()
+        Group {
+            NavigationLink(
+                tag: .carTechnicalInfo,
+                selection: activeLink,
+                destination: coordinator.provideTechnicalInfoView
+            ) { EmptyView() }
+
+            NavigationLink(
+                tag: .carAssistance,
+                selection: activeLink,
+                destination: coordinator.provideCarAssistanceView
+            ) { EmptyView() }
         }
     }
 }

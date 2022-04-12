@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CarTechnicalInfoCoordinatorView<Content: View>: View {
 
-    @ObservedObject var coordinator: CarTechnicalInfoCoordinator
+    @StateObject var coordinator: CarTechnicalInfoCoordinator
     let content: () -> Content
 
     private var activeLink: Binding<CarTechnicalInfoCoordinator.ScreenLink?> {
@@ -21,21 +21,11 @@ struct CarTechnicalInfoCoordinatorView<Content: View>: View {
     }
 
     var body: some View {
-//        NavigationView {
-            ZStack {
-                VStack {
-                    if .carAssistance == activeLink.wrappedValue {
-                        Text("Open the damn assistance!")
-                    } else {
-                        Text("Wont do")
-                    }
+        ZStack {
+            content()
 
-                    content()
-                }
-
-                navigationLinks
-            }
-//        }
+            navigationLinks
+        }
     }
 
     private var navigationLinks: some View {
