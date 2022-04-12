@@ -22,15 +22,7 @@ struct CarAssistanceCoordinatorView<Content: View>: View {
 
     var body: some View {
         ZStack {
-            VStack {
-                if activeLink.wrappedValue == .carTechnicalInfo {
-                    Text("I want tech info")
-                } else {
-                    Text("Wont do")
-                }
-
-                content()
-            }
+            content()
 
             navigationLinks
         }

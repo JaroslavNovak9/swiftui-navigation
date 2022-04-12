@@ -151,6 +151,7 @@
 				CD04BF8227E3909200833DF1 /* Entity */,
 				CD04BF8727E3914B00833DF1 /* ViewModel */,
 				CD04BF8A27E391F900833DF1 /* View */,
+				CDB489052805D85100BEF35D /* Flows */,
 			);
 			path = CarsList;
 			sourceTree = "<group>";
@@ -320,9 +321,6 @@
 			children = (
 				CD99498D280481B600D54D2E /* Identification */,
 				CD04BF8127E3908200833DF1 /* CarsList */,
-				CD04BF8F27E392DD00833DF1 /* CarDetail */,
-				CDB2C46B27E4CD93005B7B96 /* CarTechnicalInfo */,
-				CD9949782800784700D54D2E /* CarAssistance */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -343,6 +341,16 @@
 				CDB2C47427E4CFB6005B7B96 /* CarDetailCoordinatorView.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		CDB489052805D85100BEF35D /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				CD04BF8F27E392DD00833DF1 /* CarDetail */,
+				CDB2C46B27E4CD93005B7B96 /* CarTechnicalInfo */,
+				CD9949782800784700D54D2E /* CarAssistance */,
+			);
+			path = Flows;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
