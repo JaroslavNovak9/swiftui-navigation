@@ -21,12 +21,10 @@ struct IdentificationCoordinatorView<Content: View>: View {
     }
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                content()
+        ZStack {
+            content()
 
-                navigationLinks
-            }
+            navigationLinks
         }
     }
 

@@ -13,15 +13,28 @@ final class CarDetailCoordinator: ObservableObject {
     private var deepLink: DeepLink?
     @Published var activeLink: ScreenLink?
 
+    let viewAppeared = PassthroughSubject<Void, Never>()
+    private var cancellables = Set<AnyCancellable>()
+
 // MARK: - Init
 
     init(deepLink: DeepLink?) {
         self.deepLink = deepLink
         // Setup
-        setupDeepLinking()
+        setupBindings()
     }
 
 // MARK: - Bindings
+
+    private func setupBindings() {
+        viewAppeared
+            .sink { [weak self] _ in
+                self?.setupDeepLinking()
+            }
+            .store(in: &cancellables)
+    }
+
+// MARK: - Deep linking
 
     private func setupDeepLinking() {
         guard let deepLink = deepLink else {
@@ -32,10 +45,20 @@ final class CarDetailCoordinator: ObservableObject {
             activeLink = .carTechnicalInfoParametrized(
                 deepLink: deepLink
             )
-        } else if .carTechnicalInfo == deepLink {
-            activeLink = .carTechnicalInfo
+        } else if case let .carDetailParametrized(_, _, deepLink) = deepLink {
+            activeLink = .carDetailParametrized(
+                deepLink: deepLink
+            )
+        } else if case let .carAssistanceParametrized(deepLink) = deepLink {
+            activeLink = .carAssistanceParametrized(
+                deepLink: deepLink
+            )
         } else if .carAssistance == deepLink {
             activeLink = .carAssistance
+        } else if .carDetail == deepLink {
+            activeLink = .carDetail
+        } else if .carTechnicalInfo == deepLink {
+            activeLink = .carTechnicalInfo
         }
     }
 
@@ -44,12 +67,10 @@ final class CarDetailCoordinator: ObservableObject {
     private func makeCarTechnicalInfoCoordinator(
         deepLink: DeepLink?
     ) -> CarTechnicalInfoCoordinator {
-        .init(
-            deepLink: deepLink
-        )
+        .init(deepLink: deepLink)
     }
 
-// MARK: - Making views
+// MARK: - Coordinator view
 
     func provideCoordinatorView<T: View>(for content: @escaping () -> T) -> some View {
         CarDetailCoordinatorView(
@@ -58,12 +79,28 @@ final class CarDetailCoordinator: ObservableObject {
         )
     }
 
+// MARK: - Providing views
+
+    func provideCarDetailView() -> some View {
+        var preselectedDeepLink: DeepLink?
+
+        if case let .carDetailParametrized(deepLink) = activeLink {
+            preselectedDeepLink = deepLink
+        }
+
+        return CarDetailView(
+            viewModel: CarDetailVM(
+                carBrandString: "",
+                carModelString: "",
+                coordinator: .init(deepLink: preselectedDeepLink)
+            )
+        )
+    }
+
     func provideTechnicalInfoView() -> some View {
         var preselectedDeepLink: DeepLink?
 
-        if
-            case let .carTechnicalInfoParametrized(deepLink) = activeLink
-        {
+        if case let .carTechnicalInfoParametrized(deepLink) = activeLink {
             preselectedDeepLink = deepLink
         }
 
@@ -77,6 +114,18 @@ final class CarDetailCoordinator: ObservableObject {
     }
 
     func provideCarAssistanceView() -> some View {
-        CarAssistanceView()
+        var preselectedDeepLink: DeepLink?
+
+        if case let .carAssistanceParametrized(deepLink) = activeLink {
+            preselectedDeepLink = deepLink
+        }
+
+        return CarAssistanceView(
+            viewModel: CarAssistanceVM(
+                coordinator: CarAssistanceCoordinator(
+                    deepLink: preselectedDeepLink
+                )
+            )
+        )
     }
 }

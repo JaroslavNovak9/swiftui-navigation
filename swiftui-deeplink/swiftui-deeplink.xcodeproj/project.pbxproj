@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD03D98D28059B910017EDFC /* CarAssistanceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D98C28059B910017EDFC /* CarAssistanceVM.swift */; };
+		CD03D9902805A2BC0017EDFC /* CarAssistanceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D98F2805A2BC0017EDFC /* CarAssistanceCoordinator.swift */; };
+		CD03D9922805A32A0017EDFC /* CarAssistanceCoordinator+ScreenLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D9912805A32A0017EDFC /* CarAssistanceCoordinator+ScreenLink.swift */; };
+		CD03D9942805A3BA0017EDFC /* CarAssistanceCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D9932805A3BA0017EDFC /* CarAssistanceCoordinatorView.swift */; };
 		CD04BF7427E3905000833DF1 /* swiftui_deeplinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD04BF7327E3905000833DF1 /* swiftui_deeplinkApp.swift */; };
 		CD04BF7827E3905100833DF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD04BF7727E3905100833DF1 /* Assets.xcassets */; };
 		CD04BF7B27E3905100833DF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD04BF7A27E3905100833DF1 /* Preview Assets.xcassets */; };
@@ -38,6 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD03D98C28059B910017EDFC /* CarAssistanceVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarAssistanceVM.swift; sourceTree = "<group>"; };
+		CD03D98F2805A2BC0017EDFC /* CarAssistanceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarAssistanceCoordinator.swift; sourceTree = "<group>"; };
+		CD03D9912805A32A0017EDFC /* CarAssistanceCoordinator+ScreenLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarAssistanceCoordinator+ScreenLink.swift"; sourceTree = "<group>"; };
+		CD03D9932805A3BA0017EDFC /* CarAssistanceCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarAssistanceCoordinatorView.swift; sourceTree = "<group>"; };
 		CD04BF7027E3905000833DF1 /* swiftui-deeplink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftui-deeplink.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD04BF7327E3905000833DF1 /* swiftui_deeplinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftui_deeplinkApp.swift; sourceTree = "<group>"; };
 		CD04BF7727E3905100833DF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,6 +89,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD03D98B28059B830017EDFC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD03D98C28059B910017EDFC /* CarAssistanceVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CD03D98E2805A2AE0017EDFC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CD03D9912805A32A0017EDFC /* CarAssistanceCoordinator+ScreenLink.swift */,
+				CD03D98F2805A2BC0017EDFC /* CarAssistanceCoordinator.swift */,
+				CD03D9932805A3BA0017EDFC /* CarAssistanceCoordinatorView.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		CD04BF6727E3905000833DF1 = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +236,8 @@
 		CD9949782800784700D54D2E /* CarAssistance */ = {
 			isa = PBXGroup;
 			children = (
+				CD03D98E2805A2AE0017EDFC /* Coordinator */,
+				CD03D98B28059B830017EDFC /* ViewModel */,
 				CD9949792800785700D54D2E /* View */,
 			);
 			path = CarAssistance;
@@ -400,9 +428,12 @@
 				CD99498528007DAC00D54D2E /* CarTechnicalInfoVM.swift in Sources */,
 				CD99497D2800787D00D54D2E /* CarAssistanceView.swift in Sources */,
 				CD99498028007A0000D54D2E /* CarTechnicalInfoCoordinator.swift in Sources */,
+				CD03D9902805A2BC0017EDFC /* CarAssistanceCoordinator.swift in Sources */,
+				CD03D9942805A3BA0017EDFC /* CarAssistanceCoordinatorView.swift in Sources */,
 				CD99498928041A4C00D54D2E /* CarDetailCoordinator+ScreenLink.swift in Sources */,
 				CD04BF7427E3905000833DF1 /* swiftui_deeplinkApp.swift in Sources */,
 				CD04BF8627E3913900833DF1 /* CarBrand.swift in Sources */,
+				CD03D98D28059B910017EDFC /* CarAssistanceVM.swift in Sources */,
 				CD04BF8427E3909E00833DF1 /* Car.swift in Sources */,
 				CD99498B2804229900D54D2E /* CarTechnicalInfoCoordinator+ScreenLink.swift in Sources */,
 				CDB2C46F27E4CE1D005B7B96 /* CarTechnicalInfoView.swift in Sources */,
@@ -413,6 +444,7 @@
 				CDB2C47227E4CEAC005B7B96 /* CarDetailCoordinator.swift in Sources */,
 				CD994991280481D900D54D2E /* IdentificationVM.swift in Sources */,
 				CD04BF8E27E3921000833DF1 /* CarsListView.swift in Sources */,
+				CD03D9922805A32A0017EDFC /* CarAssistanceCoordinator+ScreenLink.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

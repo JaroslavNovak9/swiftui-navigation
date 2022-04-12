@@ -21,6 +21,7 @@ struct CarTechnicalInfoView: View {
 
             assistanceButton
         }
+        .navigationTitle("Technical info")
     }
 
     private var assistanceButton: some View {

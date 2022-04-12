@@ -26,14 +26,17 @@ struct CarTechnicalInfoCoordinatorView<Content: View>: View {
 
             navigationLinks
         }
+        .onAppear(perform: coordinator.viewAppeared.send)
     }
 
     private var navigationLinks: some View {
-        NavigationLink(
-            tag: .carAssistance,
-            selection: activeLink,
-            destination: coordinator.provideCarAssistanceView
-        ) { EmptyView() }
+        Group {
+            NavigationLink(
+                tag: .carAssistance,
+                selection: activeLink,
+                destination: coordinator.provideCarAssistanceView
+            ) { EmptyView() }
+        }
     }
 }
 

@@ -16,6 +16,9 @@ extension CarsListCoordinator {
             deepLink: DeepLink? = nil
         )
         case carAssistance
+        case carAssistanceParametrized(
+            deepLink: DeepLink? = nil
+        )
         case carTechnicalInfo
         case carTechnicalInfoParametrized(
             deepLink: DeepLink? = nil
@@ -27,7 +30,7 @@ extension CarsListCoordinator {
                 return "carDetail"
             case .carTechnicalInfo, .carTechnicalInfoParametrized:
                 return "carTechnicalInfo"
-            case .carAssistance:
+            case .carAssistance, .carAssistanceParametrized:
                 return "carAssistance"
             }
         }
@@ -41,6 +44,8 @@ extension CarsListCoordinator.ScreenLink {
             return .carTechnicalInfo
         case .carDetailParametrized:
             return .carDetail
+        case .carAssistanceParametrized:
+            return .carAssistance
         default:
             return self
         }

@@ -101,8 +101,19 @@ final class DeepLinkManager: ObservableObject {
 //            )
             deepLinkSubject
                 .send(
-                    .carTechnicalInfoParametrized(
-                        nestedLink: .carAssistance
+//                    .carDetailParametrized(
+//                        carBrand: "",
+//                        carModel: "",
+//                        nestedLink: .carTechnicalInfoParametrized(
+//                            nestedLink: .carAssistanceParametrized(nestedLink: .carTechnicalInfo)
+//                        )
+//                    )
+                    .carDetailParametrized(
+                        carBrand: "",
+                        carModel: "",
+                        nestedLink: .carAssistanceParametrized(
+                            nestedLink: .carTechnicalInfo
+                        )
                     )
                 )
             return true

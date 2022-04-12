@@ -26,6 +26,7 @@ struct CarDetailCoordinatorView<Content: View>: View {
 
             navigationLinks
         }
+        .onAppear(perform: coordinator.viewAppeared.send)
     }
 
     private var navigationLinks: some View {
@@ -40,6 +41,12 @@ struct CarDetailCoordinatorView<Content: View>: View {
                 tag: .carAssistance,
                 selection: activeLink,
                 destination: coordinator.provideCarAssistanceView
+            ) { EmptyView() }
+
+            NavigationLink(
+                tag: .carDetail,
+                selection: activeLink,
+                destination: coordinator.provideCarDetailView
             ) { EmptyView() }
         }
     }

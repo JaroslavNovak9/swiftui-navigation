@@ -28,7 +28,6 @@ struct CarsListCoordinatorView<Content: View>: View {
                 navigationLinks
             }
         }
-        .navigationViewStyle(.stack)
     }
 
     private var navigationLinks: some View {

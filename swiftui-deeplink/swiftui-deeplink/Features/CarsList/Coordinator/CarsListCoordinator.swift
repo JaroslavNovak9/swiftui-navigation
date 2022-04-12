@@ -36,14 +36,10 @@ final class CarsListCoordinator: ObservableObject {
     }
 
     private func setupDeepLinking() {
-        print("ZDE setup deeplink")
-
         deepLinkManager
             .outDeepLink
             .sink { [weak self] deepLink in
                 guard let deepLink = deepLink else { return }
-
-                print("ZDE catched again \(deepLink)")
 
                 if case let .carDetailParametrized(carBrand, carModel, deepLink) = deepLink {
                     self?.activeLink = .carDetailParametrized(
@@ -55,6 +51,12 @@ final class CarsListCoordinator: ObservableObject {
                     self?.activeLink = .carTechnicalInfoParametrized(
                         deepLink: deepLink
                     )
+                } else if case let .carAssistanceParametrized(deepLink) = deepLink {
+                    self?.activeLink = .carAssistanceParametrized(
+                        deepLink: deepLink
+                    )
+                } else if .carAssistance == deepLink {
+                    self?.activeLink = .carAssistance
                 }
             }
             .store(in: &cancellables)
@@ -84,7 +86,21 @@ final class CarsListCoordinator: ObservableObject {
     }
 
     func provideAssistanceView() -> some View {
-        let view: CarAssistanceView = .init()
+        var preselectedDeepLink: DeepLink?
+
+        if
+            case let .carAssistanceParametrized(deepLink) = activeLink
+        {
+            preselectedDeepLink = deepLink
+        }
+
+        let view: CarAssistanceView = .init(
+            viewModel: CarAssistanceVM(
+                coordinator: CarAssistanceCoordinator(
+                    deepLink: preselectedDeepLink
+                )
+            )
+        )
 
         return view
     }

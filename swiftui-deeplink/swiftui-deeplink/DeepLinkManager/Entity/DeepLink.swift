@@ -19,6 +19,7 @@ indirect enum DeepLink {
     case carTechnicalInfo
     case carTechnicalInfoParametrized(nestedLink: Self? = nil)
     case carAssistance
+    case carAssistanceParametrized(nestedLink: Self? = nil)
 }
 
 extension DeepLink {
@@ -30,6 +31,8 @@ extension DeepLink {
             return .carDetail
         case .carTechnicalInfoParametrized:
             return .carTechnicalInfo
+        case .carAssistanceParametrized:
+            return .carAssistance
         default:
             return self
         }
@@ -45,7 +48,7 @@ extension DeepLink: Identifiable, Hashable {
             return "carDetail"
         case .carTechnicalInfo, .carTechnicalInfoParametrized:
             return "carTechnicalInfo"
-        case .carAssistance:
+        case .carAssistance, .carAssistanceParametrized:
             return "carAssistance"
         }
     }

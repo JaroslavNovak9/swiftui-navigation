@@ -38,32 +38,33 @@ struct swiftui_deeplinkApp: App {
                 }
             }
         }
-
     }
 
     private var identifiedContent: some View {
-        TabView(
-            selection: $deepLinkManager.currentTab
-        ) {
-            Text("Home")
-                .environmentObject(deepLinkManager)
-                .tag(DeepLinkManager.Tab.home)
-                .tabItem {
-                    Image(systemName: "house.fill")
-                }
+            TabView(
+                selection: $deepLinkManager.currentTab
+            ) {
+                Text("Home")
+                    .environmentObject(deepLinkManager)
+                    .tag(DeepLinkManager.Tab.home)
+                    .navigationTitle("Home")
+                    .tabItem {
+                        Image(systemName: "house.fill")
+                    }
 
-            CarsListView(
-                viewModel: .init(
-                    coordinator: .init(
-                        deepLinkManager: deepLinkManager
+                CarsListView(
+                    viewModel: .init(
+                        coordinator: .init(
+                            deepLinkManager: deepLinkManager
+                        )
                     )
                 )
-            )
-            .tag(DeepLinkManager.Tab.list)
-            .tabItem {
-                Image(systemName: "car")
-            }
+                .tag(DeepLinkManager.Tab.list)
+                .tabItem {
+                    Image(systemName: "car")
+                }
         }
+        .navigationViewStyle(.stack)
     }
 
     private var identification: some View {

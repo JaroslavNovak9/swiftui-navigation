@@ -10,10 +10,14 @@ import Foundation
 extension CarTechnicalInfoCoordinator {
     enum ScreenLink: Identifiable, Hashable {
         case carAssistance
+        case carAssistanceParametrized(deepLink: DeepLink?)
+        case carDetail
 
         var id: String {
             switch self {
-            case .carAssistance:
+            case .carDetail:
+                return "carDetail"
+            case .carAssistance, .carAssistanceParametrized:
                 return "carAssistance"
             }
         }
@@ -23,6 +27,8 @@ extension CarTechnicalInfoCoordinator {
 extension CarTechnicalInfoCoordinator.ScreenLink {
     var unparametrized: Self {
         switch self {
+        case .carAssistanceParametrized:
+            return .carAssistance
         default:
             return self
         }
