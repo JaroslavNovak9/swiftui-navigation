@@ -39,7 +39,9 @@ final class CarDetailCoordinator: ObservableObject {
 
 // MARK: - Making coordinators
 
-    private func makeCarTechnicalInfoCoordinator() -> CarTechnicalInfoCoordinator {
+    private func makeCarTechnicalInfoCoordinator(
+        deepLink: DeepLink?
+    ) -> CarTechnicalInfoCoordinator {
         .init(
             deepLink: deepLink
         )
@@ -55,9 +57,19 @@ final class CarDetailCoordinator: ObservableObject {
     }
 
     func provideTechnicalInfoView() -> some View {
-        CarTechnicalInfoView(
+        var preselectedDeepLink: DeepLink?
+
+        if
+            case let .carTechnicalInfoParametrized(deepLink) = activeLink
+        {
+            preselectedDeepLink = deepLink
+        }
+
+        return CarTechnicalInfoView(
             viewModel: .init(
-                coordinator: self.makeCarTechnicalInfoCoordinator()
+                coordinator: self.makeCarTechnicalInfoCoordinator(
+                    deepLink: preselectedDeepLink
+                )
             )
         )
     }

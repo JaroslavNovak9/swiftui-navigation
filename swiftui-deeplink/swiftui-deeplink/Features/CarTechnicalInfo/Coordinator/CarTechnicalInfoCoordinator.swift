@@ -28,10 +28,11 @@ final class CarTechnicalInfoCoordinator: ObservableObject {
             return
         }
 
-        if case let .carTechnicalInfoParametrized(technicalInfoNestedLink) = deepLink {
-            if technicalInfoNestedLink?.unparametrized == .carAssistance {
-                activeLink = .carAssistance
-            }
+        print("ZDE \(deepLink.unparametrized)")
+
+        if deepLink.unparametrized == .carAssistance {
+            print("Setting up active link")
+            activeLink = .carAssistance
         }
     }
 

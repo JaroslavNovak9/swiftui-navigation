@@ -38,16 +38,6 @@ final class IdentificationCoordinator: ObservableObject {
                 self?.savedDeepLink = deepLink
             }
             .store(in: &cancellables)
-
-        userSuccessfullyIdentified
-            .sink { [weak self] _ in
-                print("ZDE repeat \(self?.savedDeepLink)")
-
-                self?.deepLinkManager.repeatDeepLinkCall(
-                    with: self?.savedDeepLink
-                )
-            }
-            .store(in: &cancellables)
     }
 
 // MARK: - Making coordinators

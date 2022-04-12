@@ -21,11 +21,21 @@ struct CarTechnicalInfoCoordinatorView<Content: View>: View {
     }
 
     var body: some View {
-        ZStack {
-            content()
+//        NavigationView {
+            ZStack {
+                VStack {
+                    if .carAssistance == activeLink.wrappedValue {
+                        Text("Open the damn assistance!")
+                    } else {
+                        Text("Wont do")
+                    }
 
-            navigationLinks
-        }
+                    content()
+                }
+
+                navigationLinks
+            }
+//        }
     }
 
     private var navigationLinks: some View {
@@ -33,9 +43,7 @@ struct CarTechnicalInfoCoordinatorView<Content: View>: View {
             tag: .carAssistance,
             selection: activeLink,
             destination: coordinator.provideCarAssistanceView
-        ) {
-            EmptyView()
-        }
+        ) { EmptyView() }
     }
 }
 

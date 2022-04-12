@@ -16,7 +16,35 @@ struct CarTechnicalInfoView: View {
     }
 
     func content() -> some View {
-        Text("Car technical info")
+        VStack {
+            Text("Car technical info")
+
+            assistanceButton
+        }
+    }
+
+    private var assistanceButton: some View {
+        button(
+            action: viewModel.openCarAssistance,
+            text: "Car assistance"
+        )
+    }
+
+    private func button(
+        action: @escaping () -> Void,
+        text: String
+    ) -> some View {
+        Button {
+            action()
+        } label: {
+            Text(text)
+                .fontWeight(.bold)
+        }
+        .padding(.vertical, 16)
+        .padding(.horizontal, 24)
+        .background(.black)
+        .foregroundColor(.white)
+        .cornerRadius(16)
     }
 }
 

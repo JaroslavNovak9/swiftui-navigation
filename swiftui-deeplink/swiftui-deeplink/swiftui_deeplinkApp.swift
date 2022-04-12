@@ -11,13 +11,14 @@ import SwiftUI
 struct swiftui_deeplinkApp: App {
 
     @StateObject private var deepLinkManager: DeepLinkManager = .init()
-    @State private var isUserIdentified: Bool = true
+    @State private var isUserIdentified: Bool = false
 
     var body: some Scene {
         WindowGroup {
             Group {
                 if isUserIdentified {
                     identifiedContent
+                        .onAppear(perform: deepLinkManager.repeatDeepLinkCall)
                 } else {
                     identification
                 }
@@ -25,7 +26,7 @@ struct swiftui_deeplinkApp: App {
             .onReceive(NotificationCenter.default.publisher(
                 for: UIApplication.willEnterForegroundNotification
             )) { _ in
-               isUserIdentified = true
+               isUserIdentified = false
             }
             .environmentObject(deepLinkManager)
             .onOpenURL { url in
