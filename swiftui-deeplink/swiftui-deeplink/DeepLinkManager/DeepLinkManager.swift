@@ -12,15 +12,24 @@ import UIKit
 final class DeepLinkManager: ObservableObject {
 
     @Published var currentTab: Tab = .home
-    @Published var activeDeepLink: DeepLink?
+
+    @Published var savedDeepLink: DeepLink?
+    private var isUserIdentified: Bool
 
     private var deepLinkSubject = PassthroughSubject<DeepLink?, Never>()
     var outDeepLink: AnyPublisher<DeepLink?, Never> {
         deepLinkSubject.eraseToAnyPublisher()
     }
 
-    let deepLinkReachedDestination = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
+
+    init(isUserIdentified: Bool = false) {
+        self.isUserIdentified = isUserIdentified
+    }
+
+    func repeatDeepLinkCall(with deepLink: DeepLink?) {
+        deepLinkSubject.send(deepLink)
+    }
 
     func evaluateDeepLink(url: URL) -> Bool {
         guard let host = URLComponents(

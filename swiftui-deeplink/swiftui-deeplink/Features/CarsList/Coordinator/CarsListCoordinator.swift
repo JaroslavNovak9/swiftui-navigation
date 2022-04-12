@@ -36,10 +36,14 @@ final class CarsListCoordinator: ObservableObject {
     }
 
     private func setupDeepLinking() {
+        print("ZDE setup deeplink")
+
         deepLinkManager
             .outDeepLink
             .sink { [weak self] deepLink in
                 guard let deepLink = deepLink else { return }
+
+                print("ZDE catched again \(deepLink)")
 
                 if case let .carDetailParametrized(carBrand, carModel, deepLink) = deepLink {
                     self?.activeLink = .carDetailParametrized(
