@@ -23,6 +23,11 @@
 		CD04BFA027E460D700833DF1 /* CarsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD04BF9F27E460D700833DF1 /* CarsListCoordinator.swift */; };
 		CD04BFA227E461F500833DF1 /* CarsListCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD04BFA127E461F500833DF1 /* CarsListCoordinatorView.swift */; };
 		CD04BFA527E463B300833DF1 /* CarDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD04BFA427E463B300833DF1 /* CarDetailVM.swift */; };
+		CD391D6E280EAEAE00A30C91 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CD391D6D280EAEAE00A30C91 /* SwiftUINavigation */; };
+		CD391D72280EAEF400A30C91 /* CarDealershipCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD391D71280EAEF400A30C91 /* CarDealershipCoordinatorView.swift */; };
+		CD391D78280EB47000A30C91 /* CarDealershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD391D77280EB47000A30C91 /* CarDealershipView.swift */; };
+		CD391D7A280EE3CA00A30C91 /* CarDealershipCoordinatorRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD391D79280EE3CA00A30C91 /* CarDealershipCoordinatorRoute.swift */; };
+		CD391D7C280EE5DC00A30C91 /* CarDealershipVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD391D7B280EE5DC00A30C91 /* CarDealershipVM.swift */; };
 		CD9949772800713600D54D2E /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9949762800713600D54D2E /* DeepLink.swift */; };
 		CD99497D2800787D00D54D2E /* CarAssistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD99497C2800787D00D54D2E /* CarAssistanceView.swift */; };
 		CD99498028007A0000D54D2E /* CarTechnicalInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD99497F28007A0000D54D2E /* CarTechnicalInfoCoordinator.swift */; };
@@ -60,6 +65,10 @@
 		CD04BF9F27E460D700833DF1 /* CarsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsListCoordinator.swift; sourceTree = "<group>"; };
 		CD04BFA127E461F500833DF1 /* CarsListCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsListCoordinatorView.swift; sourceTree = "<group>"; };
 		CD04BFA427E463B300833DF1 /* CarDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailVM.swift; sourceTree = "<group>"; };
+		CD391D71280EAEF400A30C91 /* CarDealershipCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDealershipCoordinatorView.swift; sourceTree = "<group>"; };
+		CD391D77280EB47000A30C91 /* CarDealershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDealershipView.swift; sourceTree = "<group>"; };
+		CD391D79280EE3CA00A30C91 /* CarDealershipCoordinatorRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDealershipCoordinatorRoute.swift; sourceTree = "<group>"; };
+		CD391D7B280EE5DC00A30C91 /* CarDealershipVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDealershipVM.swift; sourceTree = "<group>"; };
 		CD9949762800713600D54D2E /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		CD99497C2800787D00D54D2E /* CarAssistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarAssistanceView.swift; sourceTree = "<group>"; };
 		CD99497F28007A0000D54D2E /* CarTechnicalInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTechnicalInfoCoordinator.swift; sourceTree = "<group>"; };
@@ -83,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD391D6E280EAEAE00A30C91 /* SwiftUINavigation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +236,41 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		CD391D6F280EAED100A30C91 /* CarDealership */ = {
+			isa = PBXGroup;
+			children = (
+				CD391D7D280EE7CD00A30C91 /* Coordinator */,
+				CD391D7F280EE7DE00A30C91 /* ViewModel */,
+				CD391D7E280EE7D800A30C91 /* View */,
+			);
+			path = CarDealership;
+			sourceTree = "<group>";
+		};
+		CD391D7D280EE7CD00A30C91 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CD391D79280EE3CA00A30C91 /* CarDealershipCoordinatorRoute.swift */,
+				CD391D71280EAEF400A30C91 /* CarDealershipCoordinatorView.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		CD391D7E280EE7D800A30C91 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CD391D77280EB47000A30C91 /* CarDealershipView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CD391D7F280EE7DE00A30C91 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD391D7B280EE5DC00A30C91 /* CarDealershipVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		CD9949752800711E00D54D2E /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +391,7 @@
 		CDB489052805D85100BEF35D /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				CD391D6F280EAED100A30C91 /* CarDealership */,
 				CD04BF8F27E392DD00833DF1 /* CarDetail */,
 				CDB2C46B27E4CD93005B7B96 /* CarTechnicalInfo */,
 				CD9949782800784700D54D2E /* CarAssistance */,
@@ -369,6 +415,9 @@
 			dependencies = (
 			);
 			name = "swiftui-deeplink";
+			packageProductDependencies = (
+				CD391D6D280EAEAE00A30C91 /* SwiftUINavigation */,
+			);
 			productName = "swiftui-deeplink";
 			productReference = CD04BF7027E3905000833DF1 /* swiftui-deeplink.app */;
 			productType = "com.apple.product-type.application";
@@ -397,6 +446,9 @@
 				Base,
 			);
 			mainGroup = CD04BF6727E3905000833DF1;
+			packageReferences = (
+				CD391D6C280EAEAE00A30C91 /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
+			);
 			productRefGroup = CD04BF7127E3905000833DF1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -429,6 +481,7 @@
 				CD04BF9627E398A800833DF1 /* DeepLinkManager.swift in Sources */,
 				CD994993280481F300D54D2E /* IdentificationView.swift in Sources */,
 				CD04BFA527E463B300833DF1 /* CarDetailVM.swift in Sources */,
+				CD391D78280EB47000A30C91 /* CarDealershipView.swift in Sources */,
 				CD99498228007A1D00D54D2E /* CarTechnicalInfoCoordinatorView.swift in Sources */,
 				CD04BF8927E3915800833DF1 /* CarsListVM.swift in Sources */,
 				CD04BF9227E392F000833DF1 /* CarDetailView.swift in Sources */,
@@ -437,8 +490,10 @@
 				CD99497D2800787D00D54D2E /* CarAssistanceView.swift in Sources */,
 				CD99498028007A0000D54D2E /* CarTechnicalInfoCoordinator.swift in Sources */,
 				CD03D9902805A2BC0017EDFC /* CarAssistanceCoordinator.swift in Sources */,
+				CD391D7A280EE3CA00A30C91 /* CarDealershipCoordinatorRoute.swift in Sources */,
 				CD03D9942805A3BA0017EDFC /* CarAssistanceCoordinatorView.swift in Sources */,
 				CD99498928041A4C00D54D2E /* CarDetailCoordinator+ScreenLink.swift in Sources */,
+				CD391D7C280EE5DC00A30C91 /* CarDealershipVM.swift in Sources */,
 				CD04BF7427E3905000833DF1 /* swiftui_deeplinkApp.swift in Sources */,
 				CD04BF8627E3913900833DF1 /* CarBrand.swift in Sources */,
 				CD03D98D28059B910017EDFC /* CarAssistanceVM.swift in Sources */,
@@ -451,6 +506,7 @@
 				CD9949982804835500D54D2E /* IdentificationCoordinatorView.swift in Sources */,
 				CDB2C47227E4CEAC005B7B96 /* CarDetailCoordinator.swift in Sources */,
 				CD994991280481D900D54D2E /* IdentificationVM.swift in Sources */,
+				CD391D72280EAEF400A30C91 /* CarDealershipCoordinatorView.swift in Sources */,
 				CD04BF8E27E3921000833DF1 /* CarsListView.swift in Sources */,
 				CD03D9922805A32A0017EDFC /* CarAssistanceCoordinator+ScreenLink.swift in Sources */,
 			);
@@ -655,6 +711,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD391D6C280EAEAE00A30C91 /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD391D6D280EAEAE00A30C91 /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD391D6C280EAEAE00A30C91 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = SwiftUINavigation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CD04BF6827E3905000833DF1 /* Project object */;
 }

@@ -53,8 +53,8 @@ struct swiftui_deeplinkApp: App {
                     }
 
                 CarsListView(
-                    viewModel: .init(
-                        coordinator: .init(
+                    viewModel: CarsListVM(
+                        coordinator: CarsListCoordinator(
                             deepLinkManager: deepLinkManager
                         )
                     )
@@ -62,6 +62,17 @@ struct swiftui_deeplinkApp: App {
                 .tag(DeepLinkManager.Tab.list)
                 .tabItem {
                     Image(systemName: "car")
+                }
+
+                CarDealershipView(
+                    viewModel: CarDealershipVM(
+                        // Deep link nesting will be done same as the line below
+                        //preselectedRoute: .dealershipInfo
+                    )
+                )
+                .tag(DeepLinkManager.Tab.dealership)
+                .tabItem {
+                    Image(systemName: "globe")
                 }
         }
         .navigationViewStyle(.stack)

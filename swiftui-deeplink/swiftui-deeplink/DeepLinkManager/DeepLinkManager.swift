@@ -142,5 +142,6 @@ extension DeepLinkManager {
     enum Tab: String {
         case home = "home"
         case list = "list"
+        case dealership = "dealership"
     }
 }
